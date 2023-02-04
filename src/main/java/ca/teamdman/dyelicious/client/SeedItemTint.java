@@ -1,7 +1,7 @@
 package ca.teamdman.dyelicious.client;
 
 import ca.teamdman.dyelicious.Dyelicious;
-import ca.teamdman.dyelicious.common.registry.DyeliciousItems;
+import ca.teamdman.dyelicious.common.registry.ModItems;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 public class SeedItemTint {
 	@SubscribeEvent
 	public static void registerItemColours(RegisterColorHandlersEvent.Item event) {
-		DyeliciousItems.SEEDS_LOOKUP.forEach((dye, seed) -> event.getItemColors().register(new SeedItemColour(dye), seed.get()));
+		ModItems.SEEDS_LOOKUP.forEach((dye, seed) -> event.getItemColors().register(new SeedItemColour(dye), seed.get()));
 	}
 
 	public static class SeedItemColour implements ItemColor {

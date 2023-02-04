@@ -19,12 +19,11 @@ import java.util.List;
 import static ca.teamdman.dyelicious.Dyelicious.MOD_ID;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MOD_ID)
-public class DyeliciousItems {
+public class ModItems {
 	private static final DeferredRegister<Item> ITEMS      = DeferredRegister.create(
 			ForgeRegistries.ITEMS,
 			MOD_ID
 	);
-
 
 	public static final HashMap<DyeColor, RegistryObject<DyeSeedsItem>> SEEDS_LOOKUP         = new HashMap<>();
 	public static final List<RegistryObject<? extends Item>>                      REGISTRY_OBJECT_LIST = new ArrayList<>();
@@ -52,10 +51,10 @@ public class DyeliciousItems {
 						// Add default items to tab
 						.displayItems((enabledFlags, populator, hasPermissions) -> {
 							populator.accept(SEEDS_LOOKUP.get(DyeColor.GREEN).get());
-							var x = DyeliciousItems.REGISTRY_OBJECT_LIST.stream()
-									.map(RegistryObject::get)
-									.map(ItemStack::new)
-									.toList();
+							var x = ModItems.REGISTRY_OBJECT_LIST.stream()
+																 .map(RegistryObject::get)
+																 .map(ItemStack::new)
+																 .toList();
 							populator.acceptAll(x);
 						})
 		);

@@ -8,14 +8,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DyeliciousBlocks {
+public class ModBlocks {
 	private static final DeferredRegister<Block> BLOCKS           = DeferredRegister.create(
 			ForgeRegistries.BLOCKS,
 			Dyelicious.MOD_ID

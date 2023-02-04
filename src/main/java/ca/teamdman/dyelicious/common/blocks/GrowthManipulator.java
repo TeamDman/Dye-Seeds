@@ -14,7 +14,6 @@ public class GrowthManipulator {
 		// make the last stage take much longer
 		if (event.getState()
 				.getValue(CropBlock.AGE) == 6) {
-			System.out.println("ono");
 			if (event.getLevel()
 					.getRandom()
 					.nextFloat() > 0.1f) {
