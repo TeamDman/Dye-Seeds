@@ -16,8 +16,9 @@ public class GrowthManipulator {
 				.getValue(CropBlock.AGE) == 6) {
 			if (event.getLevel()
 					.getRandom()
-					.nextFloat() > 0.1f) {
-				event.setCanceled(true);
+					.nextFloat() > 0.01f) {
+				event.setResult(BlockEvent.Result.DENY);
+				System.out.println("stopped");
 			}
 		}
 	}
