@@ -11,17 +11,21 @@ public class ModLanguageProvider extends LanguageProvider {
 		super(output, Dyelicious.MOD_ID, "en_us");
 	}
 
+	private String titleCase(String str) {
+		return str.substring(0, 1)
+				.toUpperCase() + str.substring(1)
+				.toLowerCase();
+	}
 
 	@Override
 	protected void addTranslations() {
-		ModItems.SEEDS_LOOKUP.forEach((colour, regobj) -> {
-			String name = colour.name()
-					.substring(0, 1)
-					.toUpperCase() + colour.name()
-					.substring(1)
-					.toLowerCase() + " dye seeds";
-			Item item = regobj.get();
-			this.add(item, name);
+		ModItems.SEEDS_LOOKUP.forEach((colour, item) -> {
+			String name = titleCase(colour.name()) + " dye seeds";
+			this.add(item.get(), name);
+		});
+		ModItems.TRAIL_MIX_LOOKUP.forEach((colour, item) -> {
+			String name = titleCase(colour.name()) + " questionable trail mix";
+			this.add(item.get(), name);
 		});
 
 		this.add("item_group.dyelicious.main", "Dyelicious");

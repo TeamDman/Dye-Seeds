@@ -83,7 +83,6 @@ public class ModLootProvider extends LootTableProvider {
 			}
 
 			builder.apply(ApplyExplosionDecay.explosionDecay());
-//			writer.accept(block.getId().withPrefix("block/"), builder);
 			writer.accept(block.get().getLootTable(), builder);
 		}
 

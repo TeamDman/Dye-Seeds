@@ -1,6 +1,7 @@
 package ca.teamdman.dyelicious.common.registry;
 
 import ca.teamdman.dyelicious.common.items.DyeSeedsItem;
+import ca.teamdman.dyelicious.common.items.TrailMixItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
@@ -20,25 +21,33 @@ import static ca.teamdman.dyelicious.Dyelicious.MOD_ID;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MOD_ID)
 public class ModItems {
-	private static final DeferredRegister<Item> ITEMS      = DeferredRegister.create(
+	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
 			ForgeRegistries.ITEMS,
 			MOD_ID
 	);
 
 	public static final HashMap<DyeColor, RegistryObject<DyeSeedsItem>> SEEDS_LOOKUP         = new HashMap<>();
-	public static final List<RegistryObject<? extends Item>>                      REGISTRY_OBJECT_LIST = new ArrayList<>();
+	public static final HashMap<DyeColor, RegistryObject<TrailMixItem>> TRAIL_MIX_LOOKUP   = new HashMap<>();
+	public static final List<RegistryObject<? extends Item>>            CREATIVE_TAB_ITEMS = new ArrayList<>();
 
 	static {
 		for (DyeColor colour : DyeColor.values()) {
-			var regobj = ITEMS.register("seeds_"+colour.name().toLowerCase(), ()->new DyeSeedsItem(colour));
-			REGISTRY_OBJECT_LIST.add(regobj);
-			SEEDS_LOOKUP.put(colour, regobj);
+			var colourStr    = colour.name().toLowerCase();
+
+			var seedItem     = ITEMS.register(colourStr + "_seeds", () -> new DyeSeedsItem(colour));
+			CREATIVE_TAB_ITEMS.add(seedItem);
+			SEEDS_LOOKUP.put(colour, seedItem);
+
+			var trailMixItem = ITEMS.register(colourStr + "_trail_mix", () -> new TrailMixItem(colour));
+			CREATIVE_TAB_ITEMS.add(trailMixItem);
+			TRAIL_MIX_LOOKUP.put(colour, trailMixItem);
 		}
 	}
 
 	public static void register(IEventBus bus) {
 		ITEMS.register(bus);
 	}
+
 	public static CreativeModeTab tab;
 
 	@SubscribeEvent
@@ -51,10 +60,10 @@ public class ModItems {
 						// Add default items to tab
 						.displayItems((enabledFlags, populator, hasPermissions) -> {
 							populator.accept(SEEDS_LOOKUP.get(DyeColor.GREEN).get());
-							var x = ModItems.REGISTRY_OBJECT_LIST.stream()
-																 .map(RegistryObject::get)
-																 .map(ItemStack::new)
-																 .toList();
+							var x = ModItems.CREATIVE_TAB_ITEMS.stream()
+									.map(RegistryObject::get)
+									.map(ItemStack::new)
+									.toList();
 							populator.acceptAll(x);
 						})
 		);
