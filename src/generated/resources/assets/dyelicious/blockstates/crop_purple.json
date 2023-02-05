@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "dyelicious:block/crop_purple_stage0"
+    },
+    "age=1": {
+      "model": "dyelicious:block/crop_purple_stage1"
+    },
+    "age=2": {
+      "model": "dyelicious:block/crop_purple_stage2"
+    },
+    "age=3": {
+      "model": "dyelicious:block/crop_purple_stage3"
+    },
+    "age=4": {
+      "model": "dyelicious:block/crop_purple_stage4"
+    },
+    "age=5": {
+      "model": "dyelicious:block/crop_purple_stage5"
+    },
+    "age=6": {
+      "model": "dyelicious:block/crop_purple_stage6"
+    },
+    "age=7": {
+      "model": "dyelicious:block/crop_purple_stage7"
+    }
+  }
+}

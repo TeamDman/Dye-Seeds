@@ -2,6 +2,7 @@ package ca.teamdman.dyelicious;
 
 import ca.teamdman.dyelicious.common.registry.ModBlocks;
 import ca.teamdman.dyelicious.common.registry.ModItems;
+import ca.teamdman.dyelicious.common.registry.ModRecipes;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -19,6 +20,7 @@ public class Dyelicious
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItems.register(bus);
         ModBlocks.register(bus);
+        ModRecipes.register(bus);
     }
 
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "dyelicious:block/crop",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "crop": "dyelicious:block/crop_stage1"
+  }
+}

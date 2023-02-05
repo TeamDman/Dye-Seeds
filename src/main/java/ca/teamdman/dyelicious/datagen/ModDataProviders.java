@@ -17,5 +17,6 @@ public class ModDataProviders {
 		event.getGenerator().addProvider(event.includeServer(), new ModBlockStateAndModelProvider(packOutput, existingFileHelper));
 		event.getGenerator().addProvider(event.includeServer(), new ModLootProvider(packOutput));
 		event.getGenerator().addProvider(event.includeServer(), new ModBlockTagsProvider(packOutput, lookupProvider, existingFileHelper));
+		event.getGenerator().addProvider(event.includeServer(), new ModRecipeProvider(packOutput));
 	}
 }
