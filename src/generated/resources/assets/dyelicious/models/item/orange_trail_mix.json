@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "dyelicious:item/trail_mix"
-  }
+  "parent": "minecraft:builtin/entity"
 }

@@ -13,7 +13,7 @@ public class ModDataProviders {
 		var existingFileHelper = event.getExistingFileHelper();
 		var lookupProvider = event.getLookupProvider();
 		event.getGenerator().addProvider(event.includeClient(), new ModLanguageProvider(packOutput));
-		event.getGenerator().addProvider(event.includeClient(), new ItemModelProvider(packOutput, existingFileHelper));
+		event.getGenerator().addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
 		event.getGenerator().addProvider(event.includeServer(), new ModBlockStateAndModelProvider(packOutput, existingFileHelper));
 		event.getGenerator().addProvider(event.includeServer(), new ModLootProvider(packOutput));
 		event.getGenerator().addProvider(event.includeServer(), new ModBlockTagsProvider(packOutput, lookupProvider, existingFileHelper));
