@@ -25,7 +25,7 @@ public class Tinting {
 			var trailMix = ModItems.TRAIL_MIX_LOOKUP.get(dye).get();
 			var block = ModBlocks.CROP_LOOKUP.get(dye).get();
 			event.getItemColors().register(new DyeColourItemColour(dye), seed);
-			event.getItemColors().register(new DyeColourItemColour(dye), trailMix);
+//			event.getItemColors().register(new DyeColourItemColour(dye), trailMix);
 			event.getBlockColors().register(new DyeColourBlockColour(dye), block);
 		}
 	}

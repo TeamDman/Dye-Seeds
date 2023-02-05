@@ -3,9 +3,7 @@ package ca.teamdman.dyelicious.client;
 import ca.teamdman.dyelicious.Dyelicious;
 import ca.teamdman.dyelicious.common.items.TrailMixItem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Axis;
-import com.mojang.math.MatrixUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -20,7 +18,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = Dyelicious.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -41,6 +38,8 @@ public class TrailMixRenderer extends BlockEntityWithoutLevelRenderer {
 		var renderType = ItemBlockRenderTypes.getRenderType(stack, true);
 		var buffer = ItemRenderer.getFoilBufferDirect(multiBuffer, renderType, true, stack.hasFoil());
 		poseStack.pushPose();
+
+		// render base item
 		if (transformType == ItemTransforms.TransformType.FIXED) {
 //			poseStack.translate(1, 1, 0);
 //			float scale = 0.5F;
@@ -64,14 +63,29 @@ public class TrailMixRenderer extends BlockEntityWithoutLevelRenderer {
 
 		renderer.renderModelLists(baseModel, stack, packedLight, packedOverlay, poseStack, buffer);
 
-		// render ingredient
-		var ingredient = TrailMixItem.getIngredient(stack);
-		if (!ingredient.isEmpty()) {
-			var ingredientModel = renderer.getItemModelShaper().getItemModel(Items.DIAMOND);
+		// render food
+		var food = TrailMixItem.getFood(stack);
+		if (!food.isEmpty()) {
+			var foodModel = renderer.getItemModelShaper().getItemModel(food.getItem());
 			poseStack.scale(0.75f,0.75f,1f);
-			poseStack.translate(0.25,0.25,0.1f);
-			renderer.renderModelLists(ingredientModel, stack, packedLight, packedOverlay, poseStack, buffer);
+			poseStack.translate(0.25,0.25,0f);
+			renderer.renderModelLists(foodModel, stack, packedLight, packedOverlay, poseStack, buffer);
 		}
+
+		// render other
+		var other = TrailMixItem.getOther(stack);
+		if (!other.isEmpty()) {
+			var otherModel = renderer.getItemModelShaper().getItemModel(other.getItem());
+			poseStack.scale(0.75f,0.75f,1f);
+			poseStack.translate(0.25,0.25,0.05f);
+			renderer.renderModelLists(otherModel, stack, packedLight, packedOverlay, poseStack, buffer);
+		}
+
+		// render seeds
+		var seedsModel = renderer.getItemModelShaper().getItemModel(Items.WHEAT_SEEDS);
+		poseStack.scale(0.75f,0.75f,1f);
+		poseStack.translate(0.25,0.25,0.05f);
+		renderer.renderModelLists(seedsModel, stack, packedLight, packedOverlay, poseStack, buffer);
 
 		poseStack.popPose();
 	}

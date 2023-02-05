@@ -30,15 +30,15 @@ public class TrailMixRecipe extends CustomRecipe {
 
 	@Override
 	public ItemStack assemble(CraftingContainer pContainer) {
-		var foundEdible = ItemStack.EMPTY;
+		var foundFood = ItemStack.EMPTY;
 		var foundSeeds  = ItemStack.EMPTY;
 		var foundOther  = ItemStack.EMPTY;
 		for (int i = 0; i < pContainer.getContainerSize(); i++) {
 			var stack = pContainer.getItem(i);
 			if (stack.isEmpty()) continue;
 			if (stack.getItem().isEdible()) {
-				if (foundEdible.isEmpty()) {
-					foundEdible = stack;
+				if (foundFood.isEmpty()) {
+					foundFood = stack;
 				} else {
 					if (!foundOther.isEmpty()) return ItemStack.EMPTY;
 					foundOther = stack;
@@ -51,9 +51,9 @@ public class TrailMixRecipe extends CustomRecipe {
 				foundOther = stack;
 			}
 		}
-		if (foundEdible.isEmpty() || foundSeeds.isEmpty() || foundOther.isEmpty()) return ItemStack.EMPTY;
+		if (foundFood.isEmpty() || foundSeeds.isEmpty() || foundOther.isEmpty()) return ItemStack.EMPTY;
 		// todo: automatically determine color of item
-		return TrailMixItem.withIngredient(DyeColor.BLACK, foundOther);
+		return TrailMixItem.withData(DyeColor.BLACK, foundFood, foundOther);
 	}
 
 	@Override
